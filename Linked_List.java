@@ -108,6 +108,39 @@ Linked_List(){
 	  return size;
   }
   
+  // Reversing Linked list Iterative method
+  public void reverseList() {
+	 if(head==null||head.next==null) {
+		 return;
+	 } 
+	  
+	  node prevNode = head;
+	  node currNode = head.next;
+	  while(currNode!=null) {
+		  node nextNode = currNode.next;
+		  currNode.next= prevNode;
+		  
+		  //update
+		  prevNode = currNode;
+		  currNode = nextNode;
+	  }
+	     head.next = null;
+	     head = prevNode;
+  }
+  
+  // recursive Method to revere list
+  public node reverseListRecursive(node head) {
+	  if(head==null||head.next==null) {
+			 return head;
+		 }
+	  node newHead = reverseListRecursive(head.next);
+	  
+	  head.next.next = head; // new connection established
+	  head.next = null; // previous connection cut
+	  
+	  return newHead;
+  }
+  
 	public static void main(String[]args) {
 	
 		Linked_List list = new Linked_List();
@@ -117,14 +150,18 @@ Linked_List(){
 		
 		list.printList();
 		
-		list.getSize();
+		 System.out.println("Size of List "+list.getSize());
 		
-		list.removeFirst();
+		//list.removeFirst();
+		//list.printList();
+		
+		//list.removeLast();
+		//list.printList();
+		
+		list.reverseList();
 		list.printList();
 		
-		list.removeLast();
+	list.head =	list.reverseListRecursive(list.head);
 		list.printList();
-		
-		
 	}
 }
